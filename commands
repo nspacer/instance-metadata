@@ -7,3 +7,9 @@ X-Forwarded-For
 TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
 curl -H "X-aws-ec2-metadata-token: $TOKEN" -H "X-Forwarded-For:127.0.0.1" -v http://169.254.169.254/latest/meta-data/
+
+Step1:   $ aws ec2 describe-instances --instance-ids instance-id
+Step2:   $ aws ec2 modify-instance-metadata-options --instance-id instance-id --http-tokens required --http-endpoint enabled
+Step3:   $ aws ec2 modify-instance-metadata-options --instance-id instance-id --http-tokens required --http-endpoint enabled --http-put-response-hop-limit 1
+
+Note:-  Instance-id - Please paste instance id here
